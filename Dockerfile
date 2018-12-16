@@ -1,5 +1,7 @@
 FROM mynet1314/base_nlan_user_front as builder
-
+ARG BACKEND_URL
+ENV BACKEND_URL=$BACKEND_URL
+RUN env
 WORKDIR /nlan-user-front
 RUN git reset --hard HEAD && \
 	git pull -f origin master && \
