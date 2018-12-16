@@ -14,6 +14,7 @@ pipeline {
 			}
             steps {
                 sh 'echo build'
+				sh 'docker image pull mynet1314/base_nlan_user_front'
 				sh "docker build https://github.com/mynet1314/nlan-user-front.git -t nlan-user-front"
 				sh "docker image tag nlan-user-front mynet1314/nlan-user-front"
             }
