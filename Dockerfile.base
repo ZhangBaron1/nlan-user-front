@@ -1,0 +1,7 @@
+FROM node:8.14.0-alpine
+WORKDIR /nlan-user-front
+COPY . .
+RUN set -ex && \
+	apk add git && \
+	npm install && \
+	rm -rf /nlan-user-front
