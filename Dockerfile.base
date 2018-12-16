@@ -4,4 +4,8 @@ COPY . .
 RUN set -ex && \
 	apk add git && \
 	npm install && \
-	rm -rf /nlan-user-front
+	rm -rf /var/cache/apk
+
+COPY postcss.config.js  node_modules/element-ui/lib/theme-chalk/
+COPY postcss.config.js /src/styles/
+COPY postcss.config.js  node_modules/

@@ -1,12 +1,14 @@
-FROM mynet1314/base_nlan_user_front
+FROM mynet1314/base_nlan_user_front as builder
 
-RUN git clone https://github.com/mynet1314/nlan-user-front.git && \
-	cp postcss.config.js  node_modules/element-ui/lib/theme-chalk/ &&
-	cp postcss.config.js /src/styles/ && 
-	cp postcss.config.js  node_modules/
-WORKDIR nlan-user-front
-RUN npm build
+WORKDIR /nlan-user-front
+RUN git pull -f origin master
+RUN npm run build
 ENTRYPOINT ["top"]
 
+FROM nginx:1.15.7-alpine
+COPY --from=builder /nlan-user-front/dist /usr/share/nginx/html
 
+EXPOSE 80
 
+STOPSIGNAL SIGTERM
+CMD ["nginx", "-g", "daemon off;"]
