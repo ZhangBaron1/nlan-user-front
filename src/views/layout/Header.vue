@@ -5,7 +5,7 @@
         <el-menu-item index="1" :route="{path: '/home'}">首页</el-menu-item>
         <el-menu-item index="2" :route="{path: '/tos'}">服务条款 Tos</el-menu-item>
         <el-menu-item index="3" :route="{path: '/test'}">测试一下</el-menu-item>
-        <el-menu-item index="4" style="float: right" v-on:click="signOut">退出登录</el-menu-item>
+        <el-menu-item index="4" style="float: right" v-on:click="signOut">{{ LoginTip }}</el-menu-item>
         <el-menu-item index="5" style="float: right" :route="{path: '/user_info'}">{{UserName}}</el-menu-item>
 
       </el-menu>
@@ -47,6 +47,15 @@ export default {
       store.dispatch('FedLogOut').then(() => {
         location.replace(`http://${location.host}/#/login`)
       })
+    }
+  },
+  computed: {
+    LoginTip() {
+      if (store.getters.token) {
+        return '退出登录'
+      } else {
+        return '登录'
+      }
     }
   }
 }
