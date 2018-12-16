@@ -1,8 +1,9 @@
 FROM mynet1314/base_nlan_user_front as builder
 
 WORKDIR /nlan-user-front
-RUN git pull -f origin master
-RUN npm run build
+RUN git reset --hard HEAD && \
+	git pull -f origin master && \
+	npm run build
 ENTRYPOINT ["top"]
 
 FROM nginx:1.15.7-alpine
