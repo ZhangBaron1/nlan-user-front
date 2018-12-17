@@ -3,11 +3,11 @@
     <el-form autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left" label-width="0px"
       class="card-box login-form">
       <h3 class="title">Nlan</h3>
-      <el-form-item prop="username">
+      <el-form-item prop="email">
         <span class="svg-container svg-container_login">
           <svg-icon icon-class="user" />
         </span>
-        <el-input name="username" type="text" v-model="loginForm.username" autoComplete="on" placeholder="用户名" />
+        <el-input name="email" type="text" v-model="loginForm.email" autoComplete="on" placeholder="邮箱" />
       </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container">
@@ -23,7 +23,7 @@
         </el-button>
       </el-form-item>
       <div class="tips">
-        <p>用户名: nlan， 密码: best</p>
+        <p>用户名: nlan@gmail.com， 密码: bestservice</p>
       </div>
     </el-form>
   </div>
@@ -36,14 +36,14 @@ export default {
   data() {
     const validatePass = (rule, value, callback) => {
       if (value.length < 4) {
-        callback(new Error('密码不能小于4位'))
+        callback(new Error('密码不能小于8位'))
       } else {
         callback()
       }
     }
     return {
       loginForm: {
-        username: '',
+        email: '',
         password: ''
       },
       loginRules: {

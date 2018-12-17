@@ -30,17 +30,25 @@ service.interceptors.request.use(config => {
 // respone拦截器
 service.interceptors.response.use(
   response => {
-  /**
-  * code为非200时报错 可结合自己业务进行修改
-  */
     const res = response.data
+    console.log('response拦截器中:', res)
     if (res.code !== 200) {
-      Message({
-        message: res.msg,
-        type: 'error',
-        duration: 2 * 1000
-      })
-      console.log('res...', res)
+      if (res.code === 208) {
+        Message({
+          message: res.msg,
+          type: 'success',
+          duration: 2 * 1000
+        })
+      }
+
+      if (res.code === 209) {
+        Message({
+          message: res.msg,
+          type: 'warning',
+          duration: 2 * 1000
+        })
+      }
+
       if (res.code === 20002) {
         MessageBox.confirm('由于您的登录信息已过期，为了您的账户安全，已将您登出，可以取消继续留在该页面，或者重新登录', '确定登出', {
           confirmButtonText: '重新登录',
